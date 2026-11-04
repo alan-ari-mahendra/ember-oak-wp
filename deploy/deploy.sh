@@ -31,6 +31,9 @@ PLUGINS="$REMOTE_ROOT/wp-content/plugins"
 DEST="$PLUGINS/$PLUGIN_DIR"
 SHA="${GITHUB_SHA:-$(git rev-parse HEAD 2>/dev/null || echo manual)}"
 BK="/var/backups/$PROJECT/$PLUGIN_DIR-$(date +%Y%m%d%H%M%S)-${SHA:0:7}.tgz"
+# When connecting as root, run wp-cli as the site owner (wp refuses root) and give files back to it.
+WPUSER="${WP_USER:-deploy}"
+if [ "$DUSER" = root ]; then WPU="sudo -u $WPUSER "; CHOWN="chown -R $WPUSER:www-data '$DEST'"; else WPU=""; CHOWN="true"; fi
 R() { ssh $SSH_OPTS -o BatchMode=yes "$DUSER@$HOST" "$@"; }
 
 [ -d "$SRC" ] || { echo "run from repo root ($SRC missing)"; exit 1; }
@@ -52,16 +55,18 @@ R "mkdir -p '/var/backups/$PROJECT' '$DEST' && tar -czf '$BK' -C '$PLUGINS' '$PL
 echo "==> rsync"
 rsync -az --delete --no-owner --no-group --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
   --exclude='.DS_Store' --exclude='*.log' -e "ssh $SSH_OPTS -o BatchMode=yes" "$SRC" "$DUSER@$HOST:$DEST/"
+R "$CHOWN"
 
 post_deploy() {
-  R "cd '$REMOTE_ROOT' && wp cache flush >/dev/null 2>&1 || true; wp elementor flush-css >/dev/null 2>&1 || true; sudo -n /usr/bin/systemctl reload php8.3-fpm"
+  R "cd '$REMOTE_ROOT' && ${WPU}wp cache flush >/dev/null 2>&1 || true; ${WPU}wp elementor flush-css >/dev/null 2>&1 || true; $([ "$DUSER" = root ] && echo systemctl || echo sudo -n /usr/bin/systemctl) reload php8.3-fpm"
 }
 health() {
+  local HOSTHDR="$SITE_HOST"; case "$SITE_PORT" in 80|443) ;; *) HOSTHDR="$SITE_HOST:$SITE_PORT";; esac   # WP redirects when Host lacks the port
   # checked on the server itself so it does not depend on runner->VPS networking
   local base="$SCHEME://127.0.0.1:$SITE_PORT"; local k=""; [ "$SCHEME" = https ] && k="-k"
-  R "set -e; H=\$(curl -fsS $k -m 25 -H 'Host: $SITE_HOST' $base/); echo \"\$H\" | grep -q '${HEALTH_MARKER:-eo-header}'; \
-     curl -fsS $k -m 25 -o /dev/null -H 'Host: $SITE_HOST' $base/wp-json/; \
-     curl -fsS $k -m 25 -o /dev/null -H 'Host: $SITE_HOST' '$base${HEALTH_PATH:-/product/guji-natural/}'"
+  R "set -e; H=\$(curl -fsS $k -m 25 -H 'Host: $HOSTHDR' $base/); echo \"\$H\" | grep -q '${HEALTH_MARKER:-eo-header}'; \
+     curl -fsS $k -m 25 -o /dev/null -H 'Host: $HOSTHDR' $base/wp-json/; \
+     curl -fsS $k -m 25 -o /dev/null -H 'Host: $HOSTHDR' '$base${HEALTH_PATH:-/product/guji-natural/}'"
 }
 
 echo "==> post-deploy"; post_deploy
@@ -71,7 +76,7 @@ if health; then
   R "ls -1t /var/backups/$PROJECT/$PLUGIN_DIR-*.tgz 2>/dev/null | tail -n +6 | xargs -r rm -f"
 else
   echo "HEALTH_FAILED -> rolling back to $BK" >&2
-  R "rm -rf '$DEST' && tar -xzf '$BK' -C '$PLUGINS'"
+  R "rm -rf '$DEST' && tar -xzf '$BK' -C '$PLUGINS' && $CHOWN"
   post_deploy || true
   exit 1
 fi
