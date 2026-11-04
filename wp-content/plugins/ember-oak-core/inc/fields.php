@@ -28,7 +28,7 @@ add_action( 'acf/init', function () {
 			eo_f( 'float_b_big', 'Floating card B — big' ), eo_f( 'float_b_sub', 'Floating card B — sub' ),
 			eo_rep( 'trust', 'Trust indicators', [ eo_s( 'html', 'Text (HTML: <b>)' ) ] ),
 			eo_rep( 'ticker', 'Ticker items', [ eo_s( 'text', 'Text' ) ] ),
-			eo_f( 'values_title', 'Values title' ), eo_f( 'values_desc', 'Values description', 'textarea' ),
+			eo_f( 'values_title', 'Values title', 'text', [ 'key' => 'field_eo_values_heading' ] ), eo_f( 'values_desc', 'Values description', 'textarea' ),
 			eo_rep( 'values', 'Brand values (4)', [ eo_s( 'icon', 'Icon (farm|clock|score|leaf)' ), eo_s( 'title', 'Title' ), eo_s( 'text', 'Text', 'textarea' ) ] ),
 			eo_f( 'shop_title', 'Shop title' ), eo_f( 'shop_desc', 'Shop description', 'textarea' ),
 			eo_f( 'bundle_title', 'Bundle title' ), eo_f( 'bundle_desc', 'Bundle description', 'textarea' ),

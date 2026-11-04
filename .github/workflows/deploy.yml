@@ -1,0 +1,86 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wp-content/plugins/ember-oak-core/**'   # change to this project's plugin folder
+      - 'deploy/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# Never run two deploys at once; let a running deploy finish.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: PHP syntax (ember-oak-core)
+        run: |
+          fail=0
+          while IFS= read -r -d '' f; do
+            php -l "$f" >/dev/null || { echo "::error file=$f::PHP syntax error"; fail=1; }
+          done < <(find wp-content/plugins/ember-oak-core -name '*.php' -print0)
+          exit $fail
+
+      - name: JS syntax
+        run: |
+          for f in $(find wp-content/plugins/ember-oak-core -name '*.js'); do node --check "$f"; done
+
+      - name: Shell syntax (deploy scripts)
+        run: for f in deploy/*.sh; do bash -n "$f"; done
+
+      - name: Reject hard-coded secrets
+        run: |
+          if grep -rInE "(password|passwd|secret|api[_-]?key|private[_ -]?key)['\"]?\s*[:=]>?\s*['\"][^'\"]{8,}['\"]" wp-content/plugins/ember-oak-core; then
+            echo "::error::possible hard-coded secret in ember-oak-core"; exit 1
+          fi
+
+  deploy:
+    name: Deploy
+    needs: lint
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH (pinned host key)
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$RUNNER_TEMP/deploy_key"
+          chmod 600 "$RUNNER_TEMP/deploy_key"
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/known_hosts"
+
+      - name: Deploy plugin (backup, rsync, health check, auto-rollback)
+        env:
+          DEPLOY_HOST: ${{ secrets.SSH_HOST }}
+          DEPLOY_USER: ${{ secrets.SSH_USER }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          # Optional per-project settings (leave unset for the defaults below)
+          SITE_PORT: ${{ secrets.SITE_PORT }}        # default: port from SITE_URL, else 80
+          REMOTE_ROOT: ${{ secrets.REMOTE_ROOT }}    # default: /var/www/ember-oak
+          PLUGIN_DIR: ${{ secrets.PLUGIN_DIR }}      # default: ember-oak-core
+          SSH_OPTS: -i ${{ runner.temp }}/deploy_key -o IdentitiesOnly=yes -o UserKnownHostsFile=${{ runner.temp }}/known_hosts -o StrictHostKeyChecking=yes
+        run: ./deploy/deploy.sh
+
+      - name: Remove key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/deploy_key" "$RUNNER_TEMP/known_hosts"
