@@ -3,12 +3,18 @@
 #   DEPLOY_HOST=46.250.232.141 DEPLOY_USER=deploy SSH_OPTS="-i ~/.ssh/ember-oak-deploy" ./deploy/deploy.sh
 # Backs up the current plugin, rsyncs, flushes caches, runs a health check, and rolls back on failure.
 set -euo pipefail
-HOST="${DEPLOY_HOST:?DEPLOY_HOST required}"
-DUSER="${DEPLOY_USER:-deploy}"
-SITE_URL="${SITE_URL:-http://$HOST}"
-REMOTE_ROOT="${REMOTE_ROOT:-/var/www/ember-oak}"       # per project, e.g. /var/www/my-other-site
-SITE_PORT="${SITE_PORT:-}"                              # optional; defaults to the port in SITE_URL, else 80/443
-PLUGIN_DIR="${PLUGIN_DIR:-ember-oak-core}"              # plugin folder to deploy for this project
+# Secrets are often pasted with stray spaces/newlines: strip CR/LF and surrounding whitespace from every input.
+trim() { printf '%s' "$1" | tr -d '\r\n' | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//'; }
+HOST="$(trim "${DEPLOY_HOST:?DEPLOY_HOST required}")"
+DUSER="$(trim "${DEPLOY_USER:-deploy}")"; DUSER="${DUSER:-deploy}"
+SITE_URL="$(trim "${SITE_URL:-}")"; SITE_URL="${SITE_URL:-http://$HOST}"
+REMOTE_ROOT="$(trim "${REMOTE_ROOT:-}")"; REMOTE_ROOT="${REMOTE_ROOT:-/var/www/ember-oak}"   # per project, e.g. /var/www/my-other-site
+SITE_PORT="$(trim "${SITE_PORT:-}")"                    # optional; defaults to the port in SITE_URL, else 80/443
+PLUGIN_DIR="$(trim "${PLUGIN_DIR:-}")"; PLUGIN_DIR="${PLUGIN_DIR:-ember-oak-core}"           # plugin folder to deploy for this project
+# Fail fast, before touching the server, if a value is malformed (a relative REMOTE_ROOT once created a stray dir in $HOME).
+[[ "$REMOTE_ROOT" =~ ^/[A-Za-z0-9._/-]+$ && "$REMOTE_ROOT" != *..* ]] || { echo "::error::REMOTE_ROOT must be an absolute path like /var/www/my-site (got '${REMOTE_ROOT}')"; exit 2; }
+[[ "$PLUGIN_DIR" =~ ^[A-Za-z0-9._-]+$ ]] || { echo "::error::PLUGIN_DIR must be a plain folder name (got '${PLUGIN_DIR}')"; exit 2; }
+[[ "$HOST" =~ ^[A-Za-z0-9.-]+$ && "$DUSER" =~ ^[a-z_][a-z0-9_-]*$ ]] || { echo "::error::bad DEPLOY_HOST/DEPLOY_USER"; exit 2; }
 PROJECT="${PROJECT:-$(basename "$REMOTE_ROOT")}"
 SSH_OPTS="${SSH_OPTS:-}"
 HOSTPORT="$(printf '%s' "$SITE_URL" | sed -E 's#^https?://##; s#/.*$##')"
@@ -28,6 +34,10 @@ BK="/var/backups/$PROJECT/$PLUGIN_DIR-$(date +%Y%m%d%H%M%S)-${SHA:0:7}.tgz"
 R() { ssh $SSH_OPTS -o BatchMode=yes "$DUSER@$HOST" "$@"; }
 
 [ -d "$SRC" ] || { echo "run from repo root ($SRC missing)"; exit 1; }
+
+echo "==> pre-flight: $REMOTE_ROOT must be a WordPress install"
+R "test -f '$REMOTE_ROOT/wp-config.php' && test -d '$REMOTE_ROOT/wp-content/plugins'" \
+  || { echo "::error::$REMOTE_ROOT on the server is not a WordPress root (no wp-config.php). Check the REMOTE_ROOT secret."; exit 3; }
 
 echo "==> backup current plugin"
 R "mkdir -p '/var/backups/$PROJECT' '$DEST' && tar -czf '$BK' -C '$PLUGINS' '$PLUGIN_DIR' && echo saved $BK"
