@@ -1,0 +1,57 @@
+{
+	"name": "arts/base",
+	"description": "Framework-agnostic base classes for Arts WordPress plugins",
+	"license": "GPL-3.0-or-later",
+	"type": "library",
+	"authors": [
+		{
+			"name": "Artem Semkin",
+			"email": "me@artemsemkin.com"
+		}
+	],
+	"require": {
+		"php": ">=8.0"
+	},
+	"require-dev": {
+		"captainhook/captainhook": "^5.27",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"ergebnis/composer-normalize": "^2.48",
+		"phpstan/phpstan": "^2.0",
+		"squizlabs/php_codesniffer": "^3.13.4",
+		"szepeviktor/phpstan-wordpress": "^2.0",
+		"wp-coding-standards/wpcs": "^3.0"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"autoload": {
+		"psr-4": {
+			"Arts\\Base\\": "src/php/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"ergebnis/composer-normalize": true
+		},
+		"optimize-autoloader": true,
+		"sort-packages": true
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"vendor/bin/captainhook install -f -s"
+		],
+		"post-update-cmd": [
+			"vendor/bin/captainhook install -f -s"
+		],
+		"check": [
+			"@phpcs",
+			"@phpstan"
+		],
+		"fix": "@phpcbf",
+		"normalize": "composer-normalize",
+		"phpcbf": "phpcbf --standard=phpcs.xml",
+		"phpcs": "phpcs --standard=phpcs.xml",
+		"phpstan": "phpstan analyse --memory-limit=1G",
+		"phpstan:baseline": "phpstan analyse --memory-limit=1G --generate-baseline"
+	}
+}

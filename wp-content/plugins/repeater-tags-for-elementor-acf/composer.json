@@ -1,0 +1,103 @@
+{
+  "name": "arts/repeater-tags-for-elementor-acf",
+  "version": "1.0.1",
+  "description": "ACF repeater sub-fields as native Elementor dynamic tags with direct row addressing — no loops, no templates.",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://artemsemkin.com",
+  "authors": [
+    {
+      "name": "Artem Semkin",
+      "email": "me@artemsemkin.com",
+      "homepage": "https://artemsemkin.com"
+    }
+  ],
+  "plugin": {
+    "Plugin Name": "Arts Repeater Tags for Elementor and ACF",
+    "Description": "ACF repeater sub-fields as native Elementor dynamic tags with direct row addressing — no loops, no templates.",
+    "Plugin URI": "https://artemsemkin.com/plugins/repeater-tags-for-elementor-acf/",
+    "License": "GPLv3",
+    "License URI": "https://www.gnu.org/licenses/gpl-3.0",
+    "Text Domain": "repeater-tags-for-elementor-acf"
+  },
+  "wordpress": {
+    "Requires at least": "6.0",
+    "Tested up to": "7.1",
+    "Requires PHP": "8.0"
+  },
+  "require": {
+    "php": ">=8.0",
+    "arts/base": "^1.1"
+  },
+  "autoload": {
+    "classmap": [
+      "vendor-prefixed/"
+    ],
+    "psr-4": {
+      "Arts\\RepeaterTags\\": "src/php/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Arts\\RepeaterTags\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "autoloader-suffix": "ArtsRepeaterTagsPlugin"
+  },
+  "require-dev": {
+    "arts/elementor-stubs": "^4.0",
+    "brianhenryie/strauss": "^0.28",
+    "php-stubs/acf-pro-stubs": "^6.5",
+    "phpstan/phpstan": "^2.0",
+    "szepeviktor/phpstan-wordpress": "^2.0",
+    "phpunit/phpunit": "^9.6",
+    "wp-phpunit/wp-phpunit": "~7.0.0",
+    "yoast/phpunit-polyfills": "^4.0",
+    "phpstan/phpstan-phpunit": "^2.0"
+  },
+  "extra": {
+    "strauss": {
+      "target_directory": "vendor-prefixed",
+      "namespace_prefix": "ArtsRepeaterTags\\",
+      "classmap_prefix": "ArtsRepeaterTags_",
+      "constant_prefix": "ARTS_REPEATER_TAGS_VENDOR_",
+      "classmap_output": true,
+      "include_modified_date": true,
+      "include_author": true,
+      "packages": [
+        "arts/base"
+      ],
+      "update_call_sites": [
+        "src/php",
+        "src/wordpress-plugin"
+      ],
+      "delete_vendor_packages": false,
+      "exclude_from_copy": {
+        "file_patterns": [
+          "/^tests\\//",
+          "/phpcs\\.xml/",
+          "/phpstan/",
+          "/\\.github/",
+          "/\\.gitignore/"
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "phpstan": "phpstan analyse --memory-limit=1G",
+    "prefix-namespaces": [
+      "@php vendor/bin/strauss",
+      "@composer dump-autoload"
+    ],
+    "pre-autoload-dump": [
+      "@php -r \"is_dir('vendor-prefixed') || mkdir('vendor-prefixed');\""
+    ],
+    "post-install-cmd": [
+      "@php -r \"if (file_exists('vendor/bin/strauss')) { passthru(PHP_BINARY . ' vendor/bin/strauss'); passthru('composer dump-autoload'); }\""
+    ],
+    "post-update-cmd": [
+      "@php -r \"if (file_exists('vendor/bin/strauss')) { passthru(PHP_BINARY . ' vendor/bin/strauss'); passthru('composer dump-autoload'); }\""
+    ]
+  }
+}

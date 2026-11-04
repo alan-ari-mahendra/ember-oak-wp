@@ -1,0 +1,58 @@
+{
+    "packages": [
+        {
+            "name": "arts/base",
+            "version": "v1.1.1",
+            "version_normalized": "1.1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-base.git",
+                "reference": "6749b9df1da013612bf1e97d99f3bcec8aa1526a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-base/zipball/6749b9df1da013612bf1e97d99f3bcec8aa1526a",
+                "reference": "6749b9df1da013612bf1e97d99f3bcec8aa1526a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "captainhook/captainhook": "^5.27",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "ergebnis/composer-normalize": "^2.48",
+                "phpstan/phpstan": "^2.0",
+                "squizlabs/php_codesniffer": "^3.13.4",
+                "szepeviktor/phpstan-wordpress": "^2.0",
+                "wp-coding-standards/wpcs": "^3.0"
+            },
+            "time": "2026-05-16T17:59:51+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ArtsRepeaterTags\\Arts\\Base\\": "src/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Semkin",
+                    "email": "me@artemsemkin.com"
+                }
+            ],
+            "description": "Framework-agnostic base classes for Arts WordPress plugins",
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-base/issues",
+                "source": "https://github.com/artkrsk/arts-base/tree/v1.1.1"
+            },
+            "install-path": "../arts/base"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

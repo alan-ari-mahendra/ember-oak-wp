@@ -1,0 +1,111 @@
+<?php
+/**
+ * Provide a admin area view for the plugin
+ *
+ * This file is used to markup the admin-facing aspects of the plugin.
+ *
+ * @link  https://wpswings.com/
+ * @since 1.0.0
+ *
+ * @package    Subscriptions_For_Woocommerce
+ * @subpackage Subscriptions_For_Woocommerce/admin/partials
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit(); // Exit if accessed directly.
+}
+global $sfw_wps_sfw_obj;
+$sfw_default_tabs = $sfw_wps_sfw_obj->wps_sfw_plug_default_tabs();
+$sfw_tab_key = '';
+?>
+<header>
+	<?php
+	// desc - This hook is used for trial.
+	do_action( 'wps_sfw_settings_saved_notice' );
+	?>
+	<div class="wps-header-container wps-bg-white wps-r-8">
+		<h1 class="wps-header-title"><?php echo esc_attr( 'WP Swings' ); ?></h1>
+	</div>
+</header>
+<main class="wps-main wps-bg-white wps-r-8">
+	<section class="wps-section">
+		<div>
+			<?php
+				// desc - This hook is used for trial.
+			do_action( 'wps_sfw_before_common_settings_form' );
+				// if submenu is directly clicked on woocommerce.
+			$sfw_genaral_settings = apply_filters(
+				'sfw_home_settings_array',
+				array(
+				array(
+					'type'        => 'section',
+					'id'          => 'wps_sfw_section_tracking',
+					'eyebrow'     => __( 'Preferences', 'subscriptions-for-woocommerce' ),
+					'title'       => __( 'Usage Tracking', 'subscriptions-for-woocommerce' ),
+					'description' => __( 'Control whether anonymous plugin usage insights are shared to improve the subscription workflow.', 'subscriptions-for-woocommerce' ),
+				),
+				array(
+					'title' => __( 'Enable Tracking', 'subscriptions-for-woocommerce' ),
+					'type'  => 'radio-switch',
+					'id'    => 'wps_sfw_enable_tracking',
+					'value' => get_option( 'wps_sfw_enable_tracking' ),
+					'class' => 'sfw-radio-switch-class',
+					'subtitle' => __( 'Share anonymous usage data so the product team can improve onboarding and recurring commerce flows.', 'subscriptions-for-woocommerce' ),
+					'toggle_label_active' => __( 'Enabled', 'subscriptions-for-woocommerce' ),
+					'toggle_label_inactive' => __( 'Disabled', 'subscriptions-for-woocommerce' ),
+					'toggle_state_active' => __( 'Anonymous tracking is enabled for this store.', 'subscriptions-for-woocommerce' ),
+					'toggle_state_inactive' => __( 'No tracking data is being shared from this store.', 'subscriptions-for-woocommerce' ),
+				),
+				array(
+					'type'  => 'button',
+					'id'    => 'sfw_track_button',
+						'button_text' => __( 'Save', 'subscriptions-for-woocommerce' ),
+						'class' => 'sfw-button-class',
+					),
+				)
+			);
+			?>
+			<form action="" method="POST" class="wps-sfw-gen-section-form">
+				<div class="sfw-secion-wrap">
+					<?php
+					$sfw_general_html = $sfw_wps_sfw_obj->wps_sfw_plug_generate_html( $sfw_genaral_settings );
+					echo wp_kses( $sfw_general_html, $sfw_wps_sfw_obj->wps_sfw_settings_allowed_html() );
+					wp_nonce_field( 'wps-sfw-general-nonce', 'wps-sfw-general-nonce-field' );
+					?>
+				</div>
+			</form>
+			<?php
+			do_action( 'wps_sfw_before_common_settings_form' );
+			$all_plugins = get_plugins();
+			?>
+		</div>
+	</section>
+	<style type="text/css">
+		.cards {
+			   display: flex;
+			   flex-wrap: wrap;
+			   padding: 20px 40px;
+		}
+		.card {
+			flex: 1 0 518px;
+			box-sizing: border-box;
+			margin: 1rem 3.25em;
+			text-align: center;
+		}
+
+	</style>
+	<div class="centered">
+		<section class="cards">
+			<?php foreach ( get_plugins() as $key => $value ) : ?>
+				<?php if ( 'WP Swings' === $value['Author'] ) : ?>
+					<article class="card">
+						<div class="container">
+							<h4><b><?php echo esc_html( $value['Name'] ); ?></b></h4> 
+							<p><?php echo esc_html( $value['Version'] ); ?></p> 
+							<p><?php echo wp_kses_post( $value['Description'] ); ?></p>
+						</div>
+					</article>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</section>
+	</div>

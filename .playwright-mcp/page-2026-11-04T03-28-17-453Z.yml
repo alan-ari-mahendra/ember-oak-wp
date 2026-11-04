@@ -1,0 +1,528 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e3]:
+    - generic [ref=e4]: Free US shipping on orders over $40 · Roasted Monday to Thursday, shipped within 48h
+    - banner [ref=e13]:
+      - navigation "Main" [ref=e15]:
+        - link "Ember & Oak Coffee Roasters" [ref=e16] [cursor=pointer]:
+          - /url: http://ember-oak.test/
+          - generic [ref=e21]:
+            - text: Ember & Oak
+            - generic [ref=e22]: Coffee Roasters
+        - generic [ref=e23]:
+          - link "Cart" [ref=e24] [cursor=pointer]:
+            - /url: http://ember-oak.test/cart/
+            - generic [ref=e28]: "0"
+          - button "Open menu" [ref=e29] [cursor=pointer]
+  - generic [ref=e32]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]: Roasted this week in Portland, OR
+        - heading [level=1] [ref=e41]:
+          - text: Coffee that tastes like
+          - emphasis [ref=e42]: someone cared.
+        - paragraph [ref=e43]: Small-batch, single-origin and blended coffees, roasted to order and shipped within 48 hours. Sourced from farms we actually visit.
+        - generic [ref=e44]:
+          - link "Shop fresh roasts" [ref=e45] [cursor=pointer]:
+            - /url: "#shop"
+          - link "Start a subscription" [ref=e48] [cursor=pointer]:
+            - /url: "#subscribe"
+        - generic [ref=e49]:
+          - generic [ref=e50]: ★★★★★ 4.9 from 2,100+ reviews
+          - generic [ref=e51]: Free shipping over $40
+          - generic [ref=e52]: Roasted to order
+      - generic:
+        - generic [aria-hidden] [ref=e53]:
+          - text: New harvest
+          - generic [ref=e54]: Ethiopia 2026
+        - img "Bag of Guji Natural coffee":
+          - generic [ref=e59]: Ethiopia
+          - generic [ref=e60]: Guji Natural
+          - generic [ref=e61]: Blueberry · Jasmine · Cocoa
+          - generic [ref=e62]: Lot 26-041 · 340 g
+        - generic [ref=e67]:
+          - generic [ref=e68]: Roasted this week
+          - text: Ships tomorrow
+        - generic [ref=e69]:
+          - text: "88.5"
+          - generic [ref=e70]: Cupping score
+    - generic [ref=e76]:
+      - generic [ref=e77]: Direct trade
+      - generic [ref=e78]: Roasted to order
+      - generic [ref=e79]: Carbon-neutral shipping
+      - generic [ref=e80]: Q Grader on staff
+      - generic [ref=e81]: Compostable bags
+      - generic [ref=e82]: Est. 2016
+      - generic [ref=e83]: Direct trade
+      - generic [ref=e84]: Roasted to order
+      - generic [ref=e85]: Carbon-neutral shipping
+      - generic [ref=e86]: Q Grader on staff
+      - generic [ref=e87]: Compostable bags
+      - generic [ref=e88]: Est. 2016
+    - generic [ref=e94]:
+      - generic [ref=e95]:
+        - generic [ref=e96]: Why Ember & Oak
+        - heading [level=2] [ref=e97]:
+          - text: Good coffee is a chain of
+          - emphasis [ref=e98]: small decisions.
+        - paragraph [ref=e99]: From the farm gate price we pay to the day we roast, every step is chosen to make the cup better, not cheaper.
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - heading [level=3]
+          - paragraph [ref=e106]: We buy from 11 farms across 5 countries and pay an average of 2.4x the commodity price.
+        - generic [ref=e107]:
+          - heading [level=3]
+          - paragraph [ref=e112]: Nothing sits on a shelf. Your bag is roasted after you order and ships within 48 hours.
+        - generic [ref=e113]:
+          - heading [level=3]
+          - paragraph [ref=e117]: Every lot is cupped and scored by our in-house Q Grader before it goes on the menu.
+        - generic [ref=e118]:
+          - heading [level=3]
+          - paragraph [ref=e123]: Compostable packaging and carbon-neutral shipping on every order, no upcharge.
+    - generic [ref=e129]:
+      - generic [ref=e130]:
+        - generic [ref=e131]:
+          - generic [ref=e132]: This week's roasts
+          - heading [level=2] [ref=e133]:
+            - text: Fresh on the
+            - emphasis [ref=e134]: menu.
+        - paragraph [ref=e135]: Eight coffees, rotating with the harvest. Every bag is 340 g, available whole bean or ground.
+      - group "Filter by roast" [ref=e136]:
+        - button "All coffees" [pressed] [ref=e137] [cursor=pointer]
+        - button "Light" [ref=e138] [cursor=pointer]
+        - button "Medium" [ref=e139] [cursor=pointer]
+        - button "Dark" [ref=e140] [cursor=pointer]
+        - button "Decaf" [ref=e141] [cursor=pointer]
+        - button "Blends" [ref=e142] [cursor=pointer]
+      - generic [ref=e143]:
+        - article [ref=e144]:
+          - generic [ref=e145]: New
+          - link "Guji Natural" [ref=e146] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/guji-natural/
+            - generic [ref=e147]:
+              - generic [ref=e149]: Ethiopia
+              - generic [ref=e150]: Guji Natural
+          - generic [ref=e151]:
+            - generic [ref=e152]: Ethiopia · Guji Zone · Natural process
+            - generic [ref=e153]: 340 g
+          - heading [level=3] [ref=e154]:
+            - link "Guji Natural" [ref=e155] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/guji-natural/
+          - paragraph [ref=e156]: A sun-dried natural from smallholder farms around Shakiso, at 2,100 m. Big blueberry up front, jasmine as it cools, and a cocoa finish that lasts. Roasted light to keep the fruit intact.
+          - generic "Roast level Light" [ref=e157]: Light
+          - generic [ref=e163]:
+            - generic [ref=e164]:
+              - generic [ref=e165]: $19
+              - text: / 340 g
+            - link "Choose options for Guji Natural" [ref=e167] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/guji-natural/
+        - article [ref=e170]:
+          - link "Huila Honey" [ref=e171] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/huila-honey/
+            - generic [ref=e172]:
+              - generic [ref=e174]: Colombia
+              - generic [ref=e175]: Huila Honey
+          - generic [ref=e176]:
+            - generic [ref=e177]: Colombia
+            - generic [ref=e178]: 340 g
+          - heading [level=3] [ref=e179]:
+            - link "Huila Honey" [ref=e180] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/huila-honey/
+          - paragraph [ref=e181]: Red apple, caramel, florals
+          - generic "Roast level Medium-light" [ref=e182]: Medium-light
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - generic [ref=e190]: $18
+              - text: / 340 g
+            - link "Add Huila Honey to cart" [ref=e192] [cursor=pointer]:
+              - /url: /?add-to-cart=37
+        - article [ref=e195]:
+          - generic [ref=e196]: Best seller
+          - link "Hearth Blend" [ref=e197] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/hearth-blend/
+            - generic [ref=e198]:
+              - generic [ref=e200]: Brazil
+              - generic [ref=e201]: Hearth Blend
+          - generic [ref=e202]:
+            - generic [ref=e203]: Brazil · Guatemala
+            - generic [ref=e204]: 340 g
+          - heading [level=3] [ref=e205]:
+            - link "Hearth Blend" [ref=e206] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/hearth-blend/
+          - paragraph [ref=e207]: Milk chocolate, hazelnut, brown sugar
+          - generic "Roast level Medium" [ref=e208]: Medium
+          - generic [ref=e214]:
+            - generic [ref=e215]:
+              - generic [ref=e216]: $17
+              - text: / 340 g
+            - link "Add Hearth Blend to cart" [ref=e218] [cursor=pointer]:
+              - /url: /?add-to-cart=38
+        - article [ref=e221]:
+          - link "Nyeri AA" [ref=e222] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/nyeri-aa/
+            - generic [ref=e223]:
+              - generic [ref=e225]: Kenya
+              - generic [ref=e226]: Nyeri AA
+          - generic [ref=e227]:
+            - generic [ref=e228]: Kenya
+            - generic [ref=e229]: 340 g
+          - heading [level=3] [ref=e230]:
+            - link "Nyeri AA" [ref=e231] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/nyeri-aa/
+          - paragraph [ref=e232]: Blackcurrant, grapefruit, syrupy
+          - generic "Roast level Medium-light" [ref=e233]: Medium-light
+          - generic [ref=e239]:
+            - generic [ref=e240]:
+              - generic [ref=e241]: $21
+              - text: / 340 g
+            - link "Add Nyeri AA to cart" [ref=e243] [cursor=pointer]:
+              - /url: /?add-to-cart=39
+        - article [ref=e246]:
+          - link "Kochere Washed" [ref=e247] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/kochere-washed/
+            - generic [ref=e248]:
+              - generic [ref=e250]: Ethiopia
+              - generic [ref=e251]: Kochere Washed
+          - generic [ref=e252]:
+            - generic [ref=e253]: Ethiopia
+            - generic [ref=e254]: 340 g
+          - heading [level=3] [ref=e255]:
+            - link "Kochere Washed" [ref=e256] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/kochere-washed/
+          - paragraph [ref=e257]: Bergamot, peach, black tea
+          - generic "Roast level Light" [ref=e258]: Light
+          - generic [ref=e264]:
+            - generic [ref=e265]:
+              - generic [ref=e266]: $19
+              - text: / 340 g
+            - link "Add Kochere Washed to cart" [ref=e268] [cursor=pointer]:
+              - /url: /?add-to-cart=40
+        - article [ref=e271]:
+          - link "Midnight Espresso" [ref=e272] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/midnight-espresso/
+            - generic [ref=e273]:
+              - generic [ref=e275]: Blend
+              - generic [ref=e276]: Midnight Espresso
+          - generic [ref=e277]:
+            - generic [ref=e278]: Blend
+            - generic [ref=e279]: 340 g
+          - heading [level=3] [ref=e280]:
+            - link "Midnight Espresso" [ref=e281] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/midnight-espresso/
+          - paragraph [ref=e282]: Dark chocolate, molasses, dried fig
+          - generic "Roast level Dark" [ref=e283]: Dark
+          - generic [ref=e289]:
+            - generic [ref=e290]:
+              - generic [ref=e291]: $17
+              - text: / 340 g
+            - link "Add Midnight Espresso to cart" [ref=e293] [cursor=pointer]:
+              - /url: /?add-to-cart=41
+        - article [ref=e296]:
+          - generic [ref=e297]: Decaf
+          - link "Nariño Decaf" [ref=e298] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/narino-decaf/
+            - generic [ref=e299]:
+              - generic [ref=e301]: Colombia
+              - generic [ref=e302]: Nariño Decaf
+          - generic [ref=e303]:
+            - generic [ref=e304]: Colombia · EA sugarcane
+            - generic [ref=e305]: 340 g
+          - heading [level=3] [ref=e306]:
+            - link "Nariño Decaf" [ref=e307] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/narino-decaf/
+          - paragraph [ref=e308]: Toffee, orange, soft body
+          - generic "Roast level Medium" [ref=e309]: Medium
+          - generic [ref=e315]:
+            - generic [ref=e316]:
+              - generic [ref=e317]: $18
+              - text: / 340 g
+            - link "Add Nariño Decaf to cart" [ref=e319] [cursor=pointer]:
+              - /url: /?add-to-cart=42
+        - article [ref=e322]:
+          - link "La Esperanza" [ref=e323] [cursor=pointer]:
+            - /url: http://ember-oak.test/product/la-esperanza/
+            - generic [ref=e324]:
+              - generic [ref=e326]: Guatemala
+              - generic [ref=e327]: La Esperanza
+          - generic [ref=e328]:
+            - generic [ref=e329]: Guatemala
+            - generic [ref=e330]: 340 g
+          - heading [level=3] [ref=e331]:
+            - link "La Esperanza" [ref=e332] [cursor=pointer]:
+              - /url: http://ember-oak.test/product/la-esperanza/
+          - paragraph [ref=e333]: Baked apple, almond, cocoa nib
+          - generic "Roast level Medium" [ref=e334]: Medium
+          - generic [ref=e340]:
+            - generic [ref=e341]:
+              - generic [ref=e342]: $18
+              - text: / 340 g
+            - link "Add La Esperanza to cart" [ref=e344] [cursor=pointer]:
+              - /url: /?add-to-cart=43
+      - link "View all coffees" [ref=e348] [cursor=pointer]:
+        - /url: http://ember-oak.test/shop/
+    - generic [ref=e354]:
+      - generic [ref=e355]:
+        - generic [ref=e356]: Build a bundle
+        - heading [level=2] [ref=e357]:
+          - text: Three bags.
+          - emphasis [ref=e358]: One box.
+          - text: Ten percent off.
+        - paragraph [ref=e359]: Pick any three coffees and we pack them together. Mix roast levels, try a new origin, or stock up on a favorite.
+        - generic [ref=e360]:
+          - generic [ref=e361]:
+            - generic [ref=e362]: "1"
+            - generic [ref=e363]:
+              - generic [ref=e364]: Pick a bag size
+              - text: 340 g or 1 kg, same size for all three
+          - generic [ref=e365]:
+            - generic [ref=e366]: "2"
+            - generic [ref=e367]:
+              - generic [ref=e368]: Choose three coffees
+              - text: Any roast, any origin, decaf included
+          - generic [ref=e369]:
+            - generic [ref=e370]: "3"
+            - generic [ref=e371]:
+              - generic [ref=e372]: Whole bean or ground
+              - text: Set per bag at checkout
+        - link "Start building" [ref=e373] [cursor=pointer]:
+          - /url: http://ember-oak.test/product/coffee-bundle/
+      - generic [ref=e374]:
+        - generic [aria-hidden] [ref=e375]:
+          - generic [ref=e376]:
+            - generic [ref=e377]: Ethiopia
+            - generic [ref=e378]: Guji Natural
+          - generic [ref=e379]:
+            - generic [ref=e380]: Colombia
+            - generic [ref=e381]: Huila Honey
+          - generic [ref=e382]:
+            - generic [ref=e383]: Blend
+            - generic [ref=e384]: Hearth
+        - generic [ref=e385]:
+          - generic [ref=e386]:
+            - generic [ref=e387]: 3 × 340 g bags
+            - generic [ref=e388]: Save 10%
+          - generic [ref=e389]:
+            - generic [ref=e390]: About 66 cups of coffee
+            - generic [ref=e391]:
+              - generic [ref=e392]: $57
+              - generic [ref=e395]: $51
+          - generic [ref=e398]:
+            - generic [ref=e399]: Subscribe and save a further 15%
+            - generic [ref=e400]: $44
+        - link "Add 3-bag bundle" [ref=e403] [cursor=pointer]:
+          - /url: http://ember-oak.test/cart/?add-to-cart=44
+    - generic [ref=e410]:
+      - generic [ref=e412]:
+        - generic [ref=e413]: Subscribe & save
+        - heading [level=2] [ref=e414]:
+          - text: Never run out
+          - emphasis [ref=e415]: again.
+        - paragraph [ref=e416]: Choose a coffee or let our roaster pick. Set your cadence, save 15% on every bag, and change your mind whenever you like.
+        - list [ref=e417]:
+          - listitem [ref=e418]: 15% off every order, always
+          - listitem [ref=e421]: Pause, skip or cancel in one click
+          - listitem [ref=e424]: Free shipping on every delivery
+          - listitem [ref=e427]: Swap coffees anytime from your account
+        - link "Build my subscription" [ref=e430] [cursor=pointer]:
+          - /url: http://ember-oak.test/product/guji-natural/#pform
+      - generic [ref=e431]:
+        - heading "How often?" [level=4] [ref=e432]
+        - radiogroup "Delivery frequency" [ref=e433]:
+          - generic [ref=e434] [cursor=pointer]:
+            - radio "Weekly Heavy drinker"
+            - generic [ref=e435]:
+              - text: Weekly
+              - generic [ref=e436]: Heavy drinker
+          - generic [ref=e437] [cursor=pointer]:
+            - radio "Every 2 weeks Most popular" [checked]
+            - generic [ref=e438]:
+              - text: Every 2 weeks
+              - generic [ref=e439]: Most popular
+          - generic [ref=e440] [cursor=pointer]:
+            - radio "Every 4 weeks Light drinker"
+            - generic [ref=e441]:
+              - text: Every 4 weeks
+              - generic [ref=e442]: Light drinker
+        - generic [ref=e443]:
+          - generic [ref=e444]:
+            - text: Per 340 g bag
+            - generic [ref=e445]:
+              - generic [ref=e448]:
+                - generic [ref=e449]: $
+                - text: "19"
+              - generic [ref=e452]:
+                - generic [ref=e453]: $
+                - text: "16"
+          - generic [ref=e454]: Next delivery in 2 weeks
+    - generic [ref=e460]:
+      - generic [ref=e461]:
+        - img "Roaster checking beans at the drum roaster" [ref=e463]
+        - img "Green coffee beans in a sack" [ref=e465]
+      - generic [ref=e466]:
+        - generic [ref=e467]: The roastery
+        - heading [level=2] [ref=e468]:
+          - text: Ten years, one
+          - emphasis [ref=e469]: Probat,
+          - text: a lot of notebooks.
+        - paragraph [ref=e470]: We started in 2016 with a 5 kg roaster in a garage on Division Street. Today we roast on a 25 kg Probat in the same neighborhood, still in small batches, still tasting every one.
+        - paragraph [ref=e471]: Every coffee on this page has a roast log, a cupping score and a farm we can name. If you want to know more about any of them, ask us. We like talking about it.
+        - generic [ref=e472]:
+          - generic [ref=e473]:
+            - generic [ref=e474]: "11"
+            - generic [ref=e475]: Partner farms
+          - generic [ref=e476]:
+            - generic [ref=e477]: 2.4x
+            - generic [ref=e478]: Above commodity price
+          - generic [ref=e479]:
+            - generic [ref=e480]: 88+
+            - generic [ref=e481]: Average cupping score
+    - generic [ref=e487]:
+      - generic [ref=e488]:
+        - generic [ref=e489]:
+          - generic [ref=e490]: Reviews
+          - heading [level=2] [ref=e491]:
+            - text: From the
+            - emphasis [ref=e492]: mug.
+        - paragraph [ref=e493]: Verified reviews from customers who bought the coffee they are talking about.
+      - generic [ref=e494]:
+        - generic [ref=e495]:
+          - img "5 out of 5 stars" [ref=e496]: ★★★★★
+          - paragraph [ref=e497]: “The Guji Natural is the first coffee that made my partner stop adding milk. We are on our fourth bag.”
+          - generic [ref=e498]:
+            - generic [ref=e500]:
+              - generic [ref=e501]: Lena P.
+              - text: Guji Natural, subscriber
+            - generic [ref=e502]: Verified
+        - generic [ref=e503]:
+          - img "5 out of 5 stars" [ref=e504]: ★★★★★
+          - paragraph [ref=e505]: “Roast date on the bag, shipped two days later. I have ordered from a lot of roasters and most do not manage that.”
+          - generic [ref=e506]:
+            - generic [ref=e508]:
+              - generic [ref=e509]: Marcus D.
+              - text: Hearth Blend, 1 kg
+            - generic [ref=e510]: Verified
+        - generic [ref=e511]:
+          - img "5 out of 5 stars" [ref=e512]: ★★★★★
+          - paragraph [ref=e513]: “Switched our office subscription here. Every two weeks, never late, and the decaf is actually good.”
+          - generic [ref=e514]:
+            - generic [ref=e516]:
+              - generic [ref=e517]: Priya N.
+              - text: Office subscription
+            - generic [ref=e518]: Verified
+    - generic [ref=e524]:
+      - generic [ref=e525]:
+        - generic [ref=e526]: Visit the roastery
+        - heading [level=2] [ref=e527]:
+          - text: Come taste it
+          - emphasis [ref=e528]: at the source.
+        - generic [ref=e529]:
+          - img "Ember and Oak cafe counter" [ref=e531]
+          - generic [ref=e533]:
+            - generic [ref=e534]:
+              - generic [ref=e535]: Address
+              - text: 2214 SE Division St Portland, OR 97202
+            - generic [ref=e536]:
+              - generic [ref=e537]: Hours
+              - text: Mon to Fri 7 AM to 5 PM Sat to Sun 8 AM to 4 PM
+            - generic [ref=e538]:
+              - generic [ref=e539]: Cuppings
+              - text: Every Saturday, 10 AM Free, no booking needed
+            - generic [ref=e540]:
+              - generic [ref=e541]: Get here
+              - link "Directions" [ref=e542] [cursor=pointer]:
+                - /url: https://maps.google.com/?q=2214+SE+Division+St+Portland+OR
+              - text: ·
+              - link "Contact" [ref=e543] [cursor=pointer]:
+                - /url: mailto:hello@emberandoak.coffee
+      - generic [ref=e544]:
+        - generic [ref=e545]: Questions
+        - heading "Before you order" [level=2] [ref=e546]
+        - group [ref=e547]:
+          - generic "When do you roast?" [ref=e548] [cursor=pointer]:
+            - text: When do you roast?
+            - generic [aria-hidden] [ref=e549]: +
+          - paragraph [ref=e550]: We roast Monday to Thursday and ship within 48 hours of roasting, so your coffee arrives in its best window, usually 4 to 7 days after roast.
+        - group [ref=e551]:
+          - generic "How does the subscription work?" [ref=e552] [cursor=pointer]:
+            - text: How does the subscription work?
+            - generic [aria-hidden] [ref=e553]: +
+        - group [ref=e554]:
+          - generic "Do you ship outside the US?" [ref=e555] [cursor=pointer]:
+            - text: Do you ship outside the US?
+            - generic [aria-hidden] [ref=e556]: +
+        - group [ref=e557]:
+          - generic "Whole bean or ground?" [ref=e558] [cursor=pointer]:
+            - text: Whole bean or ground?
+            - generic [aria-hidden] [ref=e559]: +
+  - contentinfo [ref=e560]:
+    - generic [ref=e564]:
+      - contentinfo [ref=e565]:
+        - generic [ref=e566]:
+          - generic [ref=e567]:
+            - generic [ref=e568]:
+              - link "Ember & Oak Coffee Roasters" [ref=e569] [cursor=pointer]:
+                - /url: http://ember-oak.test/
+                - generic [ref=e574]:
+                  - text: Ember & Oak
+                  - generic [ref=e575]: Coffee Roasters
+              - paragraph [ref=e576]: New lots, roast notes and the occasional brewing guide. One email every two weeks, nothing else.
+              - generic [ref=e577]:
+                - generic [ref=e578]: Email
+                - textbox "Email" [ref=e579]:
+                  - /placeholder: Your email
+                - button "Subscribe" [ref=e580] [cursor=pointer]
+            - generic [ref=e581]:
+              - heading "Shop" [level=5] [ref=e582]
+              - list [ref=e583]:
+                - listitem [ref=e584]:
+                  - link "All coffee" [ref=e585] [cursor=pointer]:
+                    - /url: http://ember-oak.test/#shop
+                - listitem [ref=e586]:
+                  - link "Bundles" [ref=e587] [cursor=pointer]:
+                    - /url: http://ember-oak.test/#bundle
+                - listitem [ref=e588]:
+                  - link "Subscriptions" [ref=e589] [cursor=pointer]:
+                    - /url: http://ember-oak.test/#subscribe
+            - generic [ref=e590]:
+              - heading "Company" [level=5] [ref=e591]
+              - list [ref=e592]:
+                - listitem [ref=e593]:
+                  - link "Our roastery" [ref=e594] [cursor=pointer]:
+                    - /url: http://ember-oak.test/#story
+                - listitem [ref=e595]:
+                  - link "Visit" [ref=e596] [cursor=pointer]:
+                    - /url: http://ember-oak.test/#cafe
+            - generic [ref=e597]:
+              - heading "Help" [level=5] [ref=e598]
+              - list [ref=e599]:
+                - listitem [ref=e600]:
+                  - link "Shipping & returns" [ref=e601] [cursor=pointer]:
+                    - /url: http://ember-oak.test/
+                - listitem [ref=e602]:
+                  - link "My account" [ref=e603] [cursor=pointer]:
+                    - /url: http://ember-oak.test/my-account/
+                - listitem [ref=e604]:
+                  - link "FAQ" [ref=e605] [cursor=pointer]:
+                    - /url: http://ember-oak.test/#faq
+                - listitem [ref=e606]: hello@emberandoak.coffee
+          - generic [ref=e607]:
+            - generic [ref=e608]: © 2026 Ember & Oak Coffee Roasters. Portland, Oregon.
+            - generic "Accepted payments" [ref=e609]:
+              - generic [ref=e610]: VISA
+              - generic [ref=e611]: MC
+              - generic [ref=e612]: AMEX
+              - generic [ref=e613]: APPLE PAY
+              - generic [ref=e614]: PAYPAL
+            - generic [ref=e615]:
+              - link "Instagram" [ref=e616] [cursor=pointer]:
+                - /url: https://instagram.com/
+              - link "TikTok" [ref=e621] [cursor=pointer]:
+                - /url: https://tiktok.com/
+      - status [ref=e625]:
+        - generic [ref=e628]:
+          - text: ·
+          - link "View cart" [ref=e629] [cursor=pointer]:
+            - /url: http://ember-oak.test/cart/
+  - generic [ref=e630]: mobile
+  - status [ref=e631]
