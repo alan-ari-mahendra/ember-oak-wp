@@ -131,6 +131,7 @@ server {
     gzip on; gzip_types text/css application/javascript application/json image/svg+xml;
 }
 NGX
+chmod 644 /etc/nginx/sites-available/$PROJECT /etc/php/${PHPV}/fpm/pool.d/$PROJECT.conf   # readable config (deploy.sh pre-flight reads the vhost)
 ln -sf /etc/nginx/sites-available/$PROJECT /etc/nginx/sites-enabled/$PROJECT
 nginx -t
 systemctl reload nginx

@@ -39,6 +39,13 @@ echo "==> pre-flight: $REMOTE_ROOT must be a WordPress install"
 R "test -f '$REMOTE_ROOT/wp-config.php' && test -d '$REMOTE_ROOT/wp-content/plugins'" \
   || { echo "::error::$REMOTE_ROOT on the server is not a WordPress root (no wp-config.php). Check the REMOTE_ROOT secret."; exit 3; }
 
+echo "==> pre-flight: nginx must listen on port $SITE_PORT for $PROJECT"
+if ! R "ss -tln | awk '{print \$4}' | grep -qE '[:.]$SITE_PORT\$'"; then
+  ACTUAL="$(R "awk '/^[[:space:]]*listen/' /etc/nginx/sites-enabled/$PROJECT 2>/dev/null | tr -cs '0-9' ' '" || true)"
+  echo "::error::SITE_PORT=$SITE_PORT does not match the server: nothing listens on $SITE_PORT. The nginx vhost '$PROJECT' listens on: ${ACTUAL:-unknown}. Fix the SITE_PORT secret (or run deploy/server-setup.sh with SITE_PORT=$SITE_PORT first)."
+  exit 4
+fi
+
 echo "==> backup current plugin"
 R "mkdir -p '/var/backups/$PROJECT' '$DEST' && tar -czf '$BK' -C '$PLUGINS' '$PLUGIN_DIR' && echo saved $BK"
 
