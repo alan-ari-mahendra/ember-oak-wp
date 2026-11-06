@@ -82,10 +82,9 @@ add_shortcode( 'eo_hero', function () {
 		<div class="beans" aria-hidden="true" style="left:6%;top:58%"><span style="--r:30deg"></span><span style="left:26px;top:14px;--r:-20deg"></span><span style="left:8px;top:30px;--r:70deg"></span></div>
 		<div class="beans" aria-hidden="true" style="right:12%;top:22%"><span style="--r:-40deg"></span><span style="left:22px;top:12px;--r:15deg"></span></div>
 		<div class="sticker" aria-hidden="true"><?php echo esc_html( $g( 'hero_sticker' ) ); ?><small><?php echo esc_html( $g( 'hero_sticker_sub' ) ); ?></small></div>
-		<div class="bag-hero" role="img" aria-label="Bag of <?php echo esc_attr( $g( 'hero_bag_name' ) ); ?> coffee">
-			<div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="#C8572A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3c0 3-3 4-3 7a7 7 0 0 0 14 0c0-3-3-4-3-7"/><path d="M12 3c0 3-2 4-2 7a2 2 0 0 0 4 0c0-3-2-4-2-7"/></svg></div>
-			<small><?php echo esc_html( $g( 'hero_bag_origin' ) ); ?></small><b><?php echo wp_kses( nl2br( $g( 'hero_bag_name' ) ), [ 'br' => [] ] ); ?></b>
-			<small style="color:#8A7A6B"><?php echo esc_html( $g( 'hero_bag_notes' ) ); ?></small><span class="lot"><?php echo esc_html( $g( 'hero_bag_lot' ) ); ?></span></div>
+		<div class="bag-hero ph" role="img" aria-label="Bag of <?php echo esc_attr( $g( 'hero_bag_name' ) ); ?> coffee">
+			<?php $hero_img_id = $g( 'hero_bag_image' ) ?: ( function_exists( 'eo_product_by_slug' ) ? ( ( $p = eo_product_by_slug( 'guji-natural' ) ) ? get_post_thumbnail_id( $p->get_id() ) : 0 ) : 0 );
+			echo eo_img( $hero_img_id, 'large', 'Bag of ' . esc_attr( $g( 'hero_bag_name' ) ) . ' coffee', false ); ?></div>
 		<div class="float a"><i><?php echo EO_ICON_CHECK; ?></i><div><b><?php echo esc_html( $g( 'float_a_title' ) ); ?></b><small><?php echo esc_html( $g( 'float_a_sub' ) ); ?></small></div></div>
 		<div class="float b"><span class="big"><?php echo esc_html( $g( 'float_b_big' ) ); ?></span><small><?php echo esc_html( $g( 'float_b_sub' ) ); ?></small></div>
 	</div></div></section>
@@ -121,7 +120,13 @@ function eo_product_card( $product ) {
 	ob_start(); ?>
 	<article class="pcard" data-c="<?php echo esc_attr( implode( ' ', $cats ) ); ?>">
 		<?php if ( $badge ) : ?><span class="tag<?php echo 'New' === $badge ? ' new' : ''; ?>"><?php echo esc_html( $badge ); ?></span><?php endif; ?>
-		<a href="<?php echo esc_url( $link ); ?>" class="img" aria-label="<?php echo esc_attr( $product->get_name() ); ?>"><div class="bag" style="background:<?php echo esc_attr( $bg ); ?>;color:<?php echo esc_attr( $fg ); ?>"><span class="ring"></span><small><?php echo esc_html( $short ); ?></small><b><?php echo esc_html( $product->get_name() ); ?></b></div></a>
+		<a href="<?php echo esc_url( $link ); ?>" class="img" aria-label="<?php echo esc_attr( $product->get_name() ); ?>"><?php
+			$thumb_id = get_post_thumbnail_id( $id );
+			if ( $thumb_id ) {
+				echo '<div class="ph" style="position:absolute;inset:0;border-radius:inherit">' . wp_get_attachment_image( $thumb_id, 'medium', false, [ 'loading' => 'lazy' ] ) . '</div>';
+			} else { ?>
+			<div class="bag" style="background:<?php echo esc_attr( $bg ); ?>;color:<?php echo esc_attr( $fg ); ?>"><span class="ring"></span><small><?php echo esc_html( $short ); ?></small><b><?php echo esc_html( $product->get_name() ); ?></b></div>
+			<?php } ?></a>
 		<div class="meta"><span><?php echo esc_html( $origin ); ?></span><span>340 g</span></div>
 		<h3><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
 		<p class="notes"><?php echo esc_html( $f( 'tasting_notes' ) ?: wp_trim_words( $product->get_short_description(), 12 ) ); ?></p>
@@ -155,7 +160,20 @@ add_shortcode( 'eo_bundle', function () {
 		<div class="eyebrow">Build a bundle</div><h2 class="disp"><?php echo wp_kses( eo_home( 'bundle_title' ), [ 'em' => [] ] ); ?></h2>
 		<p class="lead"><?php echo esc_html( eo_home( 'bundle_desc' ) ); ?></p><div class="steps"><?php echo $steps; ?></div>
 		<a href="<?php echo esc_url( get_permalink( $b->get_id() ) ); ?>" class="btn btn-terra">Start building</a></div>
-		<div class="bundle-visual"><div class="bags" aria-hidden="true"><div class="bag" style="background:#F2E8D5"><small>Ethiopia</small><b>Guji Natural</b></div><div class="bag" style="background:#E8A58A"><small>Colombia</small><b>Huila Honey</b></div><div class="bag" style="background:#8FA68A"><small>Blend</small><b>Hearth</b></div></div>
+		<div class="bundle-visual"><div class="bags" aria-hidden="true"><?php
+			$bundle_items = [ 'guji-natural' => 'Guji Natural', 'huila-honey' => 'Huila Honey', 'hearth-blend' => 'Hearth Blend' ];
+			$bundle_bgs   = [ '#F2E8D5', '#E8A58A', '#8FA68A' ];
+			$bi = 0;
+			foreach ( $bundle_items as $slug => $name ) {
+				$bp = eo_product_by_slug( $slug );
+				$tid = $bp ? get_post_thumbnail_id( $bp->get_id() ) : 0;
+				if ( $tid ) {
+					echo '<div class="bag ph" style="background:' . esc_attr( $bundle_bgs[ $bi ] ) . '">' . wp_get_attachment_image( $tid, 'medium', false, [ 'loading' => 'lazy' ] ) . '</div>';
+				} else {
+					echo '<div class="bag" style="background:' . esc_attr( $bundle_bgs[ $bi ] ) . '"><b>' . esc_html( $name ) . '</b></div>';
+				}
+				$bi++;
+			} ?></div>
 		<div class="pricebox"><div class="row"><span>3 × 340 g bags</span><span class="save">Save 10%</span></div>
 		<div class="row"><span>About 66 cups of coffee</span><span><s><?php echo wc_price( $orig ); ?></s><b><?php echo wc_price( $deal ); ?></b></span></div>
 		<div class="row"><span>Subscribe and save a further 15%</span><b style="font-size:18px"><?php echo wc_price( $sub ); ?></b></div></div>
